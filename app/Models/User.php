@@ -18,7 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'admin_id',
         'password',
     ];
 
@@ -44,4 +44,11 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'admins';
 }
