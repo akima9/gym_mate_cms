@@ -9,7 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <x-secondary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'mass-register-gym')">대량등록</x-secondary-button>
+                    <div class="flex justify-end">
+                        <x-secondary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'mass-register-gym')">대량등록</x-secondary-button>
+                    </div>
                     <x-modal name='mass-register-gym'>
                         <form action="{{route('gyms.massStore')}}" method="post" class="p-6" enctype="multipart/form-data">
                             @csrf
