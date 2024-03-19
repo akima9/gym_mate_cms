@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            게시글 수정
+            GYM 수정
         </h2>
     </x-slot>
 
@@ -9,10 +9,28 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form action={{route('boards.update', ['board' => $board])}} method="POST">
+                    <form action={{route('gyms.update', ['gym' => $gym])}} method="POST">
                         @csrf
                         @method('PUT')
                         <div class="mb-4">
+                            <x-input-label for="title" :value="__('GYM 이름')" />
+                            <x-text-input value="{{$gym->title}}" id="title" name="title" type="text" class="mt-1 block w-full" required autofocus autocomplete="title" />
+                            <x-input-error class="mt-2" :messages="$errors->get('title')" />
+                        </div>
+                        <div class="mb-4">
+                            <x-input-label for="address" :value="__('GYM 주소')" />
+                            <x-text-input value="{{$gym->address}}" id="address" name="address" type="text" class="mt-1 block w-full" required autofocus autocomplete="address" />
+                            <x-input-error class="mt-2" :messages="$errors->get('address')" />
+                        </div>
+                        <div class="mb-4">
+                            <x-input-label for="active" :value="__('GYM 활성 상태')" />
+                            <select name="active" id="active" class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                <option value="on" @selected($gym->active === 'on')>활성</option>
+                                <option value="off" @selected($gym->active === 'off')>비활성</option>
+                            </select>
+                        </div>
+
+                        {{-- <div class="mb-4">
                             <x-input-label for="status" :value="__('모집 상태')" />
                             <select name="status" id="status" class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                 <option value="running">모집중</option>
@@ -58,7 +76,7 @@
                                 {{$board->content}}
                             </x-text-area>
                             <x-input-error class="mt-2" :messages="$errors->get('content')" />
-                        </div>
+                        </div> --}}
                         <x-primary-button>{{ __('수정') }}</x-primary-button>
                     </form>
                 </div>
@@ -66,7 +84,7 @@
         </div>
     </div>
 
-    @push('scripts')
+    {{-- @push('scripts')
         <script>
             const editBoard = {
                 loadTrainingParts: () => {
@@ -120,5 +138,5 @@
             }
             editBoard.loadTrainingParts();
         </script>
-    @endpush
+    @endpush --}}
 </x-app-layout>

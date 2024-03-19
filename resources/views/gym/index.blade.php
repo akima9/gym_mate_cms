@@ -26,11 +26,22 @@
                     {{-- <div class="flex justify-end">
                         <x-secondary-button onclick="mateBoard.checkGym()">글쓰기</x-secondary-button>
                     </div> --}}
-                    {{-- @foreach ($boards as $board)
+                    @foreach ($gyms as $gym)
                         <div class="border border-inherit p-3 mt-5 hover:bg-slate-50 rounded">
-                            <a href="{{route('boards.show', ['board' => $board, 'page' => request('page'), 'status' => request('status'), 'trainingDate' => request('trainingDate'), 'keyword' => request('keyword')])}}">
-                                <p class="mt-1 text-sm text-gray-600">
-                                    {{$board->created_at->diffForHumans()}}
+                            {{-- <a href="{{route('boards.show', ['board' => $board, 'page' => request('page'), 'status' => request('status'), 'trainingDate' => request('trainingDate'), 'keyword' => request('keyword')])}}"> --}}
+                                <a href="{{route('gyms.edit', ['gym' => $gym])}}">
+                                    @if ($gym->active === 'on')
+                                        <p>활성</p>
+                                    @else
+                                        <p>비활성</p>
+                                    @endif
+                                    <p>{{$gym->title}}</p>
+                                    <p>{{$gym->address}}</p>
+                                    <p>{{$gym->created_at}}</p>
+                                    <p>{{$gym->updated_at}}</p>
+                                </a>
+                                {{-- <p class="mt-1 text-sm text-gray-600">
+                                    {{$gym->created_at->diffForHumans()}}
                                 </p>
                                 <h2 class="text-lg font-medium text-gray-900">
                                     @if ($board->status === 'running')
@@ -62,10 +73,10 @@
                                     <p class="mt-1 text-sm text-gray-600">
                                         {{$board->user->nickname}}
                                     </p>
-                                </div>
-                            </a>
+                                </div> --}}
+                            {{-- </a> --}}
                         </div>
-                    @endforeach --}}
+                    @endforeach
                     {{-- <div class="mt-5">
                         {{$boards->withQueryString()->links()}}
                     </div> --}}

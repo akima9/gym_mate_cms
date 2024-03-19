@@ -6,6 +6,7 @@ use App\Http\Requests\StoreGymRequest;
 use App\Http\Requests\UpdateGymRequest;
 use App\Models\Gym;
 use App\Services\GymService;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 
 class GymController extends Controller implements HasMiddleware
@@ -66,7 +67,7 @@ class GymController extends Controller implements HasMiddleware
      */
     public function edit(Gym $gym)
     {
-        //
+        return view('gym.edit', compact('gym'));
     }
 
     /**
@@ -74,7 +75,8 @@ class GymController extends Controller implements HasMiddleware
      */
     public function update(UpdateGymRequest $request, Gym $gym)
     {
-        //
+        $this->gymService->update($request, $gym);
+        return redirect()->route('gyms.index');
     }
 
     /**
@@ -83,5 +85,19 @@ class GymController extends Controller implements HasMiddleware
     public function destroy(Gym $gym)
     {
         //
+    }
+
+    public function massStore(Request $request)
+    {
+        $file = $request->file('csvUpload');
+        if (!$file->isValid()) return;
+
+        $response = $this->gymService->massStore($file);
+        /**
+         * TO-DO
+         * 정상인 경우 $response = true
+         * 정상이 아닌 경우 처리되는 로직 필요!
+         */
+        return redirect()->route('gyms.index');
     }
 }

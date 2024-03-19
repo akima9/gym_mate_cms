@@ -19,5 +19,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('gyms', GymController::class);
+Route::post('/gyms/massStore', [GymController::class, 'massStore'])->name('gyms.massStore');
 
 require __DIR__.'/auth.php';
