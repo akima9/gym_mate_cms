@@ -89,10 +89,11 @@ class GymController extends Controller implements HasMiddleware
 
     public function massStore(Request $request)
     {
-        /**
-         * TO-DO
-         * 파일 확장자 제한, 용량 제한 로직 필요!
-         */
+        $rules = [
+            'csvUpload' => 'required|file|mimes:csv|max:2048'
+        ];
+        $request->validate($rules);
+        
         $file = $request->file('csvUpload');
         if (!$file->isValid()) return;
 
