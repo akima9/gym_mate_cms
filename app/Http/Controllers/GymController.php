@@ -6,8 +6,10 @@ use App\Http\Requests\StoreGymRequest;
 use App\Http\Requests\UpdateGymRequest;
 use App\Models\Gym;
 use App\Services\GymService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Redirect;
 
 class GymController extends Controller implements HasMiddleware
 {
@@ -95,14 +97,12 @@ class GymController extends Controller implements HasMiddleware
         $request->validate($rules);
         
         $file = $request->file('csvUpload');
-        if (!$file->isValid()) return;
+        if (!$file->isValid()) return redirect()->route('gyms.create')->with('status', 'massStore-failed');
 
         $response = $this->gymService->massStore($file);
-        /**
-         * TO-DO
-         * 정상인 경우 $response = true
-         * 정상이 아닌 경우 처리되는 로직 필요!
-         */
-        return redirect()->route('gyms.index');
+        if ($response) {
+            return redirect()->route('gyms.index')->with('status', 'massStore-success');
+        }
+        return redirect()->route('gyms.create')->with('status', 'massStore-failed');
     }
 }

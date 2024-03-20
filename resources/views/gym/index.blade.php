@@ -105,4 +105,11 @@
             }
         </script>
     @endpush --}}
+    @if (session('status') === 'massStore-success')
+        @push('scripts')
+            <script>
+                alert('대량 등록 성공하였습니다.');
+            </script>
+        @endpush
+    @endif
 </x-app-layout>

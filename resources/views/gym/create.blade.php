@@ -49,4 +49,12 @@
             </div>
         </div>
     </div>
+
+    @if (session('status') === 'massStore-failed')
+        @push('scripts')
+            <script>
+                alert('대량 등록에 실패하였습니다.');
+            </script>
+        @endpush
+    @endif
 </x-app-layout>
