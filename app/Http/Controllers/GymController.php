@@ -32,13 +32,9 @@ class GymController extends Controller implements HasMiddleware
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        /**
-         * TO-DO
-         * 페이지네이션 및 검색 기능 추가
-         */
-        $gyms = $this->gymService->findGyms();
+        $gyms = $this->gymService->getGymsPerPage($request);
         return view('gym.index', compact('gyms'));
     }
 

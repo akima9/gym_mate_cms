@@ -49,4 +49,9 @@ class GymService
         Storage::delete($filePath);
         return $csvData;
     }
+
+    public function getGymsPerPage($request)
+    {
+        return $this->gymRepository->getGymsPerPage($request);
+    }
 }

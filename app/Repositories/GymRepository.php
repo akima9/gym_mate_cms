@@ -39,4 +39,18 @@ class GymRepository
         }
         return Gym::insert($fileData);
     }
+
+    public function getGymsPerPage($request)
+    {
+        $keyword = (empty($request->keyword)) ? '' : $request->keyword;
+
+        if (!empty($keyword)) {
+            return Gym::where('title', 'like', '%' . $keyword . '%')
+                        ->orderBy('id', 'desc')
+                        ->paginate(10);
+        } else {
+            return Gym::orderBy('id', 'desc')
+                        ->paginate(10);
+        }
+    }
 }
