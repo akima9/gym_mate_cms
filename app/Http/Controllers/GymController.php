@@ -34,6 +34,10 @@ class GymController extends Controller implements HasMiddleware
      */
     public function index()
     {
+        /**
+         * TO-DO
+         * 페이지네이션 및 검색 기능 추가
+         */
         $gyms = $this->gymService->findGyms();
         return view('gym.index', compact('gyms'));
     }
