@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GymController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -20,5 +21,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('gyms', GymController::class);
 Route::post('/gyms/massStore', [GymController::class, 'massStore'])->name('gyms.massStore');
+
+Route::resource('clients', ClientController::class);
 
 require __DIR__.'/auth.php';

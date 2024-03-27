@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('gyms.index')" :active="request()->routeIs('gyms.index')">
                         {{ __('GYM 관리') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients.index')">
+                        {{ __('사용자 관리') }}
+                    </x-nav-link>
                 </div>
             </div>
 
